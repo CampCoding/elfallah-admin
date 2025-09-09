@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans+Arabic:wght@100..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Playpen Sans Arabic", cursive !important;
+  font-optical-sizing: auto !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
+}
+
+:where(.css-dev-only-do-not-override-or8ujb).ant-tabs
+  .ant-tabs-tab
+  + .ant-tabs-tab {
+  margin-left: 0px !important;
+  margin-right: 15px !important;
+}
+
+.ant-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+body {
+  direction: rtl;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.ant-btn {
+  background: #facc15 !important;
+  color: #222 !important;
+  transition: all 0.3s ease-in-out !important;
+}
+.ant-btn:hover {
+  background: #9b7d08 !important;
+  color: #222 !important;
+}
