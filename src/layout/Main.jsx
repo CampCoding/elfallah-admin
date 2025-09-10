@@ -156,6 +156,14 @@ export default function Main() {
 
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("emore_user");
+    } catch (err) {}
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
     <div className="flex h-screen bg-gradient-to-br from-green-900 via-orange-300 to-red-500 p-2">
       <div className="flex  bg-gray-900/60 backdrop-blur-lg p-4  rounded-3xl overflow-hidden shadow-2xl w-full  mx-auto relative">
@@ -294,6 +302,13 @@ export default function Main() {
                 />
               </div>
               <Settings className="w-5 h-5 text-gray-600 hover:text-gray-800 cursor-pointer transition-colors duration-200" />
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-1 px-3 py-2 rounded-lg bg-red-500 text-white text-xs hover:bg-red-600 transition-colors duration-200"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>تسجيل الخروج</span>
+              </button>
             </div>
           </div>
 
