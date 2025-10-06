@@ -11,6 +11,8 @@ import ExamsPage from "../pages/ExamsPage/index";
 import ExamQuesPage from "../pages/ExamQuesPage/index";
 import UnitVideosPage from "../pages/UnitVideosPage";
 import InteractiveQuestionsPage from "../pages/InteractiveQuestionsPage";
+import StudentsPage from "../pages/StudentsPage";
+import StudentsReports from "../pages/StudentsPage/StudentsReports";
 
 export const routes = [
   localStorage.getItem("emore_user")
@@ -28,6 +30,8 @@ export const routes = [
           { path: "/exams", element: <ExamsPage /> },
           { path: "/exam-questions", element: <ExamQuesPage /> },
           { path: "/unit-videos", element: <UnitVideosPage /> },
+          { path: "/students", element: <StudentsPage /> },
+          { path: "/students-reports", element: <StudentsReports /> },
           {
             path: "/interactive-questions",
             element: <InteractiveQuestionsPage />,

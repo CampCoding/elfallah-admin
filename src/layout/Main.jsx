@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import {
   BarChart3,
@@ -83,6 +84,14 @@ export default function Main() {
       path: "/exams",
       badge: null,
     },
+    {
+      id: "الطلاب",
+      icon: Users,
+      label: "الطلاب",
+      active: false,
+      path: "/students",
+      badge: null,
+    },
 
     // {
     //   id: "نظام الإدارة",
@@ -159,7 +168,9 @@ export default function Main() {
   const handleLogout = () => {
     try {
       localStorage.removeItem("emore_user");
-    } catch (err) {}
+    } catch (err) {
+      console.log(err)
+    }
     navigate("/");
     window.location.reload();
   };
