@@ -308,24 +308,24 @@ const StudentsPage = () => {
       key: "actions",
       width: 200,
       render: (_, record) => (
-        <div className="flex items-center space-x-2 rtl:space-x-reverse gap-2">
+        <div className="flex gap-2 items-center space-x-2 rtl:space-x-reverse">
           {/* زر عرض التقارير */}
           <button
             onClick={() => viewStudentReports(record.student_id)}
-            className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+            className="p-2 text-blue-600 rounded-lg transition-colors hover:bg-blue-100"
             title="عرض تقارير الطالب"
           >
             <Eye className="w-4 h-4" />
           </button>
 
           {/* زر إرسال واتساب */}
-          <button
+          {/* <button
             onClick={() => sendWhatsApp(record.student_id, record.phone)}
-            className="p-2 text-green-600 hover:bg-green-100 rounded-lg transition-colors"
+            className="p-2 text-green-600 rounded-lg transition-colors hover:bg-green-100"
             title="إرسال واتساب"
           >
             <MessageCircle className="w-4 h-4" />
-          </button>
+          </button> */}
 
           {/* زر حظر/فك الحظر */}
           <button
@@ -354,7 +354,7 @@ const StudentsPage = () => {
             onClick={() =>
               deleteStudent(record.student_id, record.student_name)
             }
-            className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+            className="p-2 text-red-600 rounded-lg transition-colors hover:bg-red-100"
             title="حذف الطالب"
           >
             <Trash2 className="w-4 h-4" />
@@ -407,16 +407,16 @@ const StudentsPage = () => {
       <nav className="flex items-center space-x-2 text-sm text-gray-600 rtl:space-x-reverse">
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
           <Users className="w-4 h-4 text-blue-500" />
-          <span className="text-blue-500 font-medium">الطلاب</span>
+          <span className="font-medium text-blue-500">الطلاب</span>
         </div>
         <ChevronRight className="w-4 h-4 text-gray-400" />
         <span className="text-gray-500">قائمة الطلاب</span>
       </nav>
 
       {/* Header Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-6 pt-2">
-          <div className="flex items-center space-x-3 rtl:space-x-reverse gap-3">
+      <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+        <div className="flex justify-between items-center pt-2 mb-6">
+          <div className="flex gap-3 items-center space-x-3 rtl:space-x-reverse">
             <div className="p-2 bg-blue-100 rounded-lg">
               <Users className="w-6 h-6 text-blue-600" />
             </div>
@@ -428,16 +428,16 @@ const StudentsPage = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-3 rtl:space-x-reverse gap-3">
-            <div className="flex space-x-2 rtl:space-x-reverse text-sm text-gray-600 gap-3">
-              <div className="flex items-center space-x-1 rtl:space-x-reverse gap-3">
+          <div className="flex gap-3 items-center space-x-3 rtl:space-x-reverse">
+            <div className="flex gap-3 space-x-2 text-sm text-gray-600 rtl:space-x-reverse">
+              <div className="flex gap-3 items-center space-x-1 rtl:space-x-reverse">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span>
                   نشط:{" "}
                   {students?.filter((item) => item?.blocked == "no").length}
                 </span>
               </div>
-              <div className="flex items-center space-x-1 rtl:space-x-reverse gap-3">
+              <div className="flex gap-3 items-center space-x-1 rtl:space-x-reverse">
                 <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                 <span>إجمالي: {students?.length}</span>
               </div>
@@ -447,32 +447,32 @@ const StudentsPage = () => {
               <div className="relative group">
                 <button
                   onClick={exportData}
-                  className="flex items-center gap-2 space-x-2 rtl:space-x-reverse px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="flex gap-2 items-center px-4 py-2 space-x-2 text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-300 transition-colors rtl:space-x-reverse hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <Download className="w-4 h-4" />
                   <span>تصدير Excel</span>
                 </button>
 
                 {/* Dropdown Menu */}
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                <div className="absolute left-0 top-full invisible z-10 mt-1 w-48 bg-white rounded-lg border border-gray-200 shadow-lg opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:visible">
                   <div className="py-1">
                     <button
                       onClick={exportData}
-                      className="w-full text-right px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2 rtl:space-x-reverse"
+                      className="flex items-center px-4 py-2 space-x-2 w-full text-sm text-right text-gray-700 hover:bg-gray-100 rtl:space-x-reverse"
                     >
                       <Download className="w-4 h-4" />
                       <span>جميع البيانات</span>
                     </button>
                     <button
                       onClick={exportActiveStudents}
-                      className="w-full text-right px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2 rtl:space-x-reverse"
+                      className="flex items-center px-4 py-2 space-x-2 w-full text-sm text-right text-gray-700 hover:bg-gray-100 rtl:space-x-reverse"
                     >
                       <Users className="w-4 h-4" />
                       <span>النشطين فقط</span>
                     </button>
                     <button
                       onClick={exportNewStudents}
-                      className="w-full text-right px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-2 rtl:space-x-reverse"
+                      className="flex items-center px-4 py-2 space-x-2 w-full text-sm text-right text-gray-700 hover:bg-gray-100 rtl:space-x-reverse"
                     >
                       <GraduationCap className="w-4 h-4" />
                       <span>الجدد فقط</span>
@@ -485,20 +485,20 @@ const StudentsPage = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="bg-gray-50 rounded-lg p-4">
-          <div className="flex items-center space-x-2 rtl:space-x-reverse mb-4  gap-2">
+        <div className="p-4 bg-gray-50 rounded-lg">
+          <div className="flex gap-2 items-center mb-4 space-x-2 rtl:space-x-reverse">
             <Filter className="w-5 h-5 text-gray-600" />
             <h3 className="text-lg font-semibold text-gray-900">تصفية البحث</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {/* Search Input */}
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 البحث عن الطلاب
               </label>
               <div className="relative">
-                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute right-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="ابحث بالاسم أو الايميل أو رقم الطالب..."
@@ -510,11 +510,11 @@ const StudentsPage = () => {
             </div>
 
             {/* <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 المرحلة الدراسية
               </label>
               <div className="relative">
-                <BookOpen className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <BookOpen className="absolute right-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2" />
                 <select
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(e.target.value)}
@@ -527,17 +527,17 @@ const StudentsPage = () => {
                     </option>
                   ))}
                 </select>
-                <ChevronRight className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                <ChevronRight className="absolute left-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none" />
               </div>
             </div> */}
 
             {/* Grade Select */}
             {/* <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 الصف الدراسي
               </label>
               <div className="relative">
-                <BookOpen className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <BookOpen className="absolute right-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2" />
                 <select
                   value={selectedGrade}
                   onChange={(e) => setSelectedGrade(e.target.value)}
@@ -552,17 +552,17 @@ const StudentsPage = () => {
                       </option>
                     ))}
                 </select>
-                <ChevronRight className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                <ChevronRight className="absolute left-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none" />
               </div>
             </div> */}
 
             {/* Status Select */}
             {/* <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 الحالة
               </label>
               <div className="relative">
-                <Star className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Star className="absolute right-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2" />
                 <select
                   value={selectedStatus}
                   onChange={(e) => setSelectedStatus(e.target.value)}
@@ -574,21 +574,21 @@ const StudentsPage = () => {
                     </option>
                   ))}
                 </select>
-                <ChevronRight className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                <ChevronRight className="absolute left-3 top-1/2 w-4 h-4 text-gray-400 transform -translate-y-1/2 pointer-events-none" />
               </div>
             </div> */}
           </div>
 
           {/* Filter Actions */}
-          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 rtl:space-x-reverse gap-3">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse gap-3">
+          <div className="flex gap-3 justify-between items-center pt-4 mt-4 border-t border-gray-200 rtl:space-x-reverse">
+            <div className="flex gap-3 items-center space-x-2 rtl:space-x-reverse">
               <button
                 onClick={clearFilters}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-300 transition-colors hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 مسح الفلاتر
               </button>
-              <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+              <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                 تطبيق الفلاتر
               </button>
             </div>
@@ -597,18 +597,18 @@ const StudentsPage = () => {
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div className="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2 lg:grid-cols-4">
         {/* Total Students Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
+        <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm transition-shadow hover:shadow-md">
+          <div className="flex justify-between items-center">
             <div>
-              <p className="text-sm font-medium text-gray-600 mb-1">
+              <p className="mb-1 text-sm font-medium text-gray-600">
                 إجمالي الطلاب
               </p>
               <p className="text-3xl font-bold text-gray-900">
                 {students?.length || 0}
               </p>
-              <p className="text-xs text-gray-500 mt-1">جميع الطلاب المسجلين</p>
+              <p className="mt-1 text-xs text-gray-500">جميع الطلاب المسجلين</p>
             </div>
             <div className="p-3 bg-blue-100 rounded-lg">
               <Users className="w-6 h-6 text-blue-600" />
@@ -617,19 +617,19 @@ const StudentsPage = () => {
         </div>
 
         {/* Active Students Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
+        <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm transition-shadow hover:shadow-md">
+          <div className="flex justify-between items-center">
             <div>
-              <p className="text-sm font-medium text-gray-600 mb-1">
+              <p className="mb-1 text-sm font-medium text-gray-600">
                 الطلاب النشطين
               </p>
               <p className="text-3xl font-bold text-green-600">
                 {students?.filter((item) => item?.blocked == "no").length || 0}
               </p>
-              <p className="text-xs text-gray-500 mt-1">حسابات نشطة</p>
+              <p className="mt-1 text-xs text-gray-500">حسابات نشطة</p>
             </div>
             <div className="p-3 bg-green-100 rounded-lg">
-              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <div className="flex justify-center items-center w-6 h-6 bg-green-500 rounded-full">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </div>
             </div>
@@ -637,19 +637,19 @@ const StudentsPage = () => {
         </div>
 
         {/* Blocked Students Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
+        <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm transition-shadow hover:shadow-md">
+          <div className="flex justify-between items-center">
             <div>
-              <p className="text-sm font-medium text-gray-600 mb-1">
+              <p className="mb-1 text-sm font-medium text-gray-600">
                 الطلاب المحظورين
               </p>
               <p className="text-3xl font-bold text-red-600">
                 {students?.filter((item) => item?.blocked == "yes").length || 0}
               </p>
-              <p className="text-xs text-gray-500 mt-1">حسابات محظورة</p>
+              <p className="mt-1 text-xs text-gray-500">حسابات محظورة</p>
             </div>
             <div className="p-3 bg-red-100 rounded-lg">
-              <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+              <div className="flex justify-center items-center w-6 h-6 bg-red-500 rounded-full">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </div>
             </div>
@@ -657,10 +657,10 @@ const StudentsPage = () => {
         </div>
 
         {/* New Students This Month Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between">
+        <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm transition-shadow hover:shadow-md">
+          <div className="flex justify-between items-center">
             <div>
-              <p className="text-sm font-medium text-gray-600 mb-1">
+              <p className="mb-1 text-sm font-medium text-gray-600">
                 طلاب جدد هذا الشهر
               </p>
               <p className="text-3xl font-bold text-purple-600">
@@ -675,7 +675,7 @@ const StudentsPage = () => {
                   return createdDate >= monthAgo;
                 }).length || 0}
               </p>
-              <p className="text-xs text-gray-500 mt-1">انضموا حديثاً</p>
+              <p className="mt-1 text-xs text-gray-500">انضموا حديثاً</p>
             </div>
             <div className="p-3 bg-purple-100 rounded-lg">
               <GraduationCap className="w-6 h-6 text-purple-600" />
@@ -685,10 +685,10 @@ const StudentsPage = () => {
       </div>
 
       {/* Additional Statistics Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 gap-6 mb-6 md:grid-cols-3">
         {/* Students by University */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4  gap-2">
+        <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+          <div className="flex gap-2 items-center mb-4 space-x-3 rtl:space-x-reverse">
             <div className="p-2 bg-indigo-100 rounded-lg">
               <BookOpen className="w-5 h-5 text-indigo-600" />
             </div>
@@ -709,20 +709,20 @@ const StudentsPage = () => {
               return (
                 <div
                   key={univ.university_id}
-                  className="flex items-center justify-between"
+                  className="flex justify-between items-center"
                 >
                   <div className="flex-1">
                     <p className="text-sm font-medium text-gray-900 truncate">
                       {univ.university_name}
                     </p>
-                    <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                    <div className="mt-1 w-full h-2 bg-gray-200 rounded-full">
                       <div
-                        className="bg-indigo-500 h-2 rounded-full transition-all duration-300"
+                        className="h-2 bg-indigo-500 rounded-full transition-all duration-300"
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
                   </div>
-                  <div className="text-right mr-3 rtl:mr-0 rtl:ml-3">
+                  <div className="mr-3 text-right rtl:mr-0 rtl:ml-3">
                     <p className="text-sm font-bold text-gray-900">{count}</p>
                     <p className="text-xs text-gray-500">{percentage}%</p>
                   </div>
@@ -733,8 +733,8 @@ const StudentsPage = () => {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4  gap-2">
+        <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+          <div className="flex gap-2 items-center mb-4 space-x-3 rtl:space-x-reverse">
             <div className="p-2 bg-orange-100 rounded-lg">
               <Calendar className="w-5 h-5 text-orange-600" />
             </div>
@@ -743,8 +743,8 @@ const StudentsPage = () => {
             </h3>
           </div>
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-              <div className="flex items-center space-x-2 rtl:space-x-reverse gap-2">
+            <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+              <div className="flex gap-2 items-center space-x-2 rtl:space-x-reverse">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">طلاب نشطين</span>
               </div>
@@ -752,8 +752,8 @@ const StudentsPage = () => {
                 {students?.filter((item) => item?.blocked == "no").length || 0}
               </span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
-              <div className="flex items-center space-x-2 rtl:space-x-reverse gap-2">
+            <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
+              <div className="flex gap-2 items-center space-x-2 rtl:space-x-reverse">
                 <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">طلاب محظورين</span>
               </div>
@@ -761,8 +761,8 @@ const StudentsPage = () => {
                 {students?.filter((item) => item?.blocked == "yes").length || 0}
               </span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-              <div className="flex items-center space-x-2 rtl:space-x-reverse gap-2">
+            <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+              <div className="flex gap-2 items-center space-x-2 rtl:space-x-reverse">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm text-gray-700">إجمالي المسجلين</span>
               </div>
@@ -774,8 +774,8 @@ const StudentsPage = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 gap-2">
-          <div className="flex items-center space-x-3 rtl:space-x-reverse mb-4  gap-2">
+        <div className="gap-2 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+          <div className="flex gap-2 items-center mb-4 space-x-3 rtl:space-x-reverse">
             <div className="p-2 bg-teal-100 rounded-lg">
               <Star className="w-5 h-5 text-teal-600" />
             </div>
@@ -786,7 +786,7 @@ const StudentsPage = () => {
           <div className="space-y-3">
             <button
               onClick={exportData}
-              className="w-full flex items-center justify-center space-x-2 rtl:space-x-reverse p-3 bg-green-600 text-white rounded-lg gap-2 hover:bg-green-700 transition-colors"
+              className="flex gap-2 justify-center items-center p-3 space-x-2 w-full text-white bg-green-600 rounded-lg transition-colors rtl:space-x-reverse hover:bg-green-700"
             >
               <Download className="w-4 h-4" />
               <span className="text-sm font-medium">تصدير جميع البيانات</span>
@@ -794,7 +794,7 @@ const StudentsPage = () => {
 
             <button
               onClick={exportActiveStudents}
-              className="w-full flex items-center justify-center space-x-2 rtl:space-x-reverse p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors gap-2"
+              className="flex gap-2 justify-center items-center p-3 space-x-2 w-full text-white bg-blue-600 rounded-lg transition-colors rtl:space-x-reverse hover:bg-blue-700"
             >
               <Users className="w-4 h-4" />
               <span className="text-sm font-medium">تصدير النشطين فقط</span>
@@ -802,7 +802,7 @@ const StudentsPage = () => {
 
             <button
               onClick={exportNewStudents}
-              className="w-full flex items-center justify-center space-x-2 rtl:space-x-reverse p-3 bg-purple-600 text-white gap-2 rounded-lg hover:bg-purple-700 transition-colors"
+              className="flex gap-2 justify-center items-center p-3 space-x-2 w-full text-white bg-purple-600 rounded-lg transition-colors rtl:space-x-reverse hover:bg-purple-700"
             >
               <GraduationCap className="w-4 h-4" />
               <span className="text-sm font-medium">تصدير الجدد فقط</span>
@@ -812,8 +812,8 @@ const StudentsPage = () => {
       </div>
 
       {/* Table Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-4">
+      <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+        <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold text-gray-900">قائمة الطلاب</h3>
           <div className="text-sm text-gray-600">
             عرض{" "}
