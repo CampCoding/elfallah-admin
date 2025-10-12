@@ -122,7 +122,7 @@ const EditExam = ({ open, setOpen, exam, getExams }) => {
       }
     >
       {exam && (
-        <Form form={form} layout="vertical" className="h-full flex flex-col">
+        <Form form={form} layout="vertical" className="flex flex-col h-full">
           <Form.Item
             name="exam_name"
             label="اسم الاختبار"
@@ -148,6 +148,7 @@ const EditExam = ({ open, setOpen, exam, getExams }) => {
               options={[
                 { label: "وحدة", value: "unit" },
                 { label: "فيديو", value: "video" },
+                { label: "امتحان على كامل الوحدة", value: "all unit" },
               ]}
             />
           </Form.Item>

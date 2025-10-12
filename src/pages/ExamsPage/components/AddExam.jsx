@@ -113,7 +113,7 @@ const AddExam = ({ data, open, setOpen, getExams }) => {
         form={form}
         layout="vertical"
         onFinish={submit}
-        className="h-full flex flex-col"
+        className="flex flex-col h-full"
       >
         <Form.Item
           name="exam_name"
@@ -167,6 +167,7 @@ const AddExam = ({ data, open, setOpen, getExams }) => {
             options={[
               { label: "وحدة", value: "unit" },
               { label: "فيديو", value: "video" },
+              { label: "امتحان على كامل الوحدة", value: "all unit" },
             ]}
           />
         </Form.Item>
