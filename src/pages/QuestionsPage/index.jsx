@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Card, Col, Row, Button, Empty, Space } from "antd";
-import { ArrowRight, Eye } from "lucide-react";
+import { Card, Col, Row, Button } from "antd";
+import { ArrowRight } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DataTable from "../../layout/DataTable";
 import useQuestionsPage from "./useQuestionsPage";
@@ -8,6 +8,7 @@ import AddQuestion from "./components/AddQuestion";
 import DeleteQuestion from "./components/DeleteQuestion";
 import QuestionDetailsModal from "./components/QuestionDetailsModal";
 import AssignQuestionToExam from "./components/AssignQuestionToExam";
+import CopyQuestionsModal from "./components/CopyQuestionsModal";
 
 const QuestionsPage = () => {
   const {
@@ -32,6 +33,8 @@ const QuestionsPage = () => {
 
   const [viewModal, setViewModal] = useState(false);
   const [viewingQuestion, setViewingQuestion] = useState(null);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [copyModalOpen, setCopyModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -66,6 +69,16 @@ const QuestionsPage = () => {
               </div>
             }
           >
+            {selectedRowKeys.length > 0 && (
+              <div className="flex justify-end mb-4">
+                <Button
+                  type="primary"
+                  onClick={() => setCopyModalOpen(true)}
+                >
+                  نسخ {selectedRowKeys.length} سؤال
+                </Button>
+              </div>
+            )}
             <DataTable
               loading={loading}
               addBtn={true}
@@ -77,6 +90,11 @@ const QuestionsPage = () => {
               onAddClick={() => setAddModal(true)}
               searchPlaceholder={"بحث في الأسئلة"}
               table={{ header: headers, rows: questions }}
+              rowSelection={{
+                selectedRowKeys,
+                onChange: (keys) => setSelectedRowKeys(keys),
+              }}
+              rowKey="question_id"
               onRow={(record) => {
                 return {
                   onClick: () => {
@@ -134,6 +152,19 @@ const QuestionsPage = () => {
           }}
         />
       )}
+
+      <CopyQuestionsModal
+        open={copyModalOpen}
+        onClose={() => {
+          setCopyModalOpen(false);
+        }}
+        selectedQuestionIds={selectedRowKeys}
+        onSuccess={() => {
+          setCopyModalOpen(false);
+          setSelectedRowKeys([]);
+          getQuestions();
+        }}
+      />
     </div>
   );
 };
