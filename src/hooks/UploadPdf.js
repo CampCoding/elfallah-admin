@@ -19,7 +19,7 @@ const uploadPdf = async (file, options = {}) => {
   }
 
   // Validate file size (10MB limit)
-  const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+  const maxSize = 100000 * 1024 * 1024; // 10MB in bytes
   if (file.size > maxSize) {
     const error = new Error("File size exceeds 10MB limit.");
     if (onError) onError(error);

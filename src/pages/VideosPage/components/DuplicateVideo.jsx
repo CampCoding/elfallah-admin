@@ -118,7 +118,7 @@ const DuplicateVideo = ({ open, setOpen, video, getVideos }) => {
       return false;
     }
 
-    const isLt10M = file.size / 1024 / 1024 < 10;
+    const isLt10M = file.size / 1024 / 1024 < 100000;
     if (!isLt10M) {
       toast.error("حجم الملف يجب أن يكون أقل من 10MB!");
       return false;
