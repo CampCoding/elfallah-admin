@@ -13,33 +13,35 @@ import UnitVideosPage from "../pages/UnitVideosPage";
 import InteractiveQuestionsPage from "../pages/InteractiveQuestionsPage";
 import StudentsPage from "../pages/StudentsPage";
 import StudentsReports from "../pages/StudentsPage/StudentsReports";
+import NotesPage from "../pages/NotesPage";
 
 export const routes = [
   localStorage.getItem("emore_user")
     ? {
-        path: "/",
-        // element: <Main />,
-        element: <Main />,
-        children: [
-          { path: "/", element: <>الصفحة الرئيسية</> },
-          { path: "/units", element: <UnitsPage /> },
-          { path: "/courses", element: <CoursesPage /> },
-          { path: "/videos", element: <VideosPage /> },
-          { path: "/pdfs", element: <PDFsPage /> },
-          { path: "/questions", element: <QuestionsPage /> },
-          { path: "/exams", element: <ExamsPage /> },
-          { path: "/exam-questions", element: <ExamQuesPage /> },
-          { path: "/unit-videos", element: <UnitVideosPage /> },
-          { path: "/students", element: <StudentsPage /> },
-          { path: "/students-reports", element: <StudentsReports /> },
-          {
-            path: "/interactive-questions",
-            element: <InteractiveQuestionsPage />,
-          },
-        ],
-      }
+      path: "/",
+      // element: <Main />,
+      element: <Main />,
+      children: [
+        { path: "/", element: <>الصفحة الرئيسية</> },
+        { path: "/units", element: <UnitsPage /> },
+        { path: "/courses", element: <CoursesPage /> },
+        { path: "/videos", element: <VideosPage /> },
+        { path: "/pdfs", element: <PDFsPage /> },
+        { path: "/questions", element: <QuestionsPage /> },
+        { path: "/exams", element: <ExamsPage /> },
+        { path: "/exam-questions", element: <ExamQuesPage /> },
+        { path: "/unit-videos", element: <UnitVideosPage /> },
+        { path: "/students", element: <StudentsPage /> },
+        { path: "/students-reports", element: <StudentsReports /> },
+        {
+          path: "/interactive-questions",
+          element: <InteractiveQuestionsPage />,
+        },
+        { path: "/notes", element: <NotesPage /> },
+      ],
+    }
     : {
-        path: "*",
-        element: <LoginPage />,
-      },
+      path: "*",
+      element: <LoginPage />,
+    },
 ];

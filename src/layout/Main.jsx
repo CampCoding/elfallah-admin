@@ -92,6 +92,14 @@ export default function Main() {
       path: "/students",
       badge: null,
     },
+    {
+      id: "المذكرات",
+      icon: BookOpen,
+      label: "المذكرات",
+      active: false,
+      path: "/notes",
+      badge: null,
+    },
 
     // {
     //   id: "نظام الإدارة",
@@ -188,9 +196,8 @@ export default function Main() {
 
         {/* Sidebar */}
         <div
-          className={` transition  ${
-            sidebarOpen ? "translate-x-0" : "translate-x-full bg-transparent  "
-          } 
+          className={` transition  ${sidebarOpen ? "translate-x-0" : "translate-x-full bg-transparent  "
+            } 
           fixed lg:relative  bg-black rounded lg:bg-transparent lg:translate-x-0 z-50 lg:z-auto
           w-64  flex flex-col transition-transform duration-300 ease-in-out h-full`}
         >
@@ -257,16 +264,14 @@ export default function Main() {
                   <li key={item.id}>
                     <button
                       onClick={() => handleMenuClick(item)}
-                      className={`w-full flex items-center gap-x-3 px-4 py-3 !text-3xl  rounded-lg text-left transition-all duration-200 group ${
-                        item.path == location.pathname
+                      className={`w-full flex items-center gap-x-3 px-4 py-3 !text-3xl  rounded-lg text-left transition-all duration-200 group ${item.path == location.pathname
                           ? "!bg-yellow-400 bg-opacity-20 shadow-2xl backdrop-blur-lg !text-black border-l-4 border-yellow-400 "
                           : "!text-white hover:text-white hover:bg-gray-800 hover:shadow-md"
-                      }`}
+                        }`}
                     >
                       <Icon
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          isActive ? "scale-110" : "group-hover:scale-105"
-                        }`}
+                        className={`w-4 h-4 transition-transform duration-200 ${isActive ? "scale-110" : "group-hover:scale-105"
+                          }`}
                       />
                       <span className="text-xs font-medium tracking-wide ">
                         {item.label}
