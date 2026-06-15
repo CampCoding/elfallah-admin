@@ -119,27 +119,25 @@ const useQuestionsPage = () => {
       key: "question_text",
       width: 400,
       render: (text, record) => {
+        const isMatchingImages = record.type === "matching-with-images";
+
+        const displayText = isMatchingImages
+          ? (record.matchingImages || []).map((p) => p.name).join(" / ")
+          : record.question_text;
+
         return (
           <Tooltip
             direction="ltr"
             placement="topLeft"
             title={
-              <div
-                style={{
-                  direction: "ltr",
-                }}
-              >
-                {record.question_text}
-              </div>
+              <div style={{ direction: "ltr" }}>{displayText}</div>
             }
           >
             <div
-              style={{
-                direction: "ltr",
-              }}
+              style={{ direction: "ltr" }}
               className="max-w-[25rem] truncate"
             >
-              {record.question_text}
+              {displayText}
             </div>
           </Tooltip>
         );
@@ -159,6 +157,8 @@ const useQuestionsPage = () => {
             return `ترتيب ${
               record.game_type === "word" ? "الكلمات" : "الأحرف"
             }`;
+          case "matching-with-images":
+            return "مطابقة مع صور";
           default:
             return type;
         }

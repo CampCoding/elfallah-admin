@@ -14,6 +14,7 @@ import { CloseOutlined, UploadOutlined } from "@ant-design/icons";
 import McqQuestions from "./McqQuestions";
 import ArrangePuzzleQuestions from "./ArrangePuzzleQuestions";
 import LineMatchQuestions from "./LineMatchQuestions";
+import MatchingWithImagesQuestions from "./MatchingWithImagesQuestions";
 import { baseUrl } from "../../../utils/base_url";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -29,12 +30,16 @@ const AddQuestion = ({ open, setOpen, unitId, courseId, getQuestions }) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [matchingPairs, setMatchingPairs] = useState([
+    { name: "", imageFile: null, imagePreview: "" },
+  ]);
 
   const handleClose = () => {
     form.resetFields();
     setQuestionType("mcq");
     setImageUrl("");
     setImageFile(null);
+    setMatchingPairs([{ name: "", imageFile: null, imagePreview: "" }]);
     setOpen(false);
   };
 
@@ -96,6 +101,30 @@ const AddQuestion = ({ open, setOpen, unitId, courseId, getQuestions }) => {
         questionData.question_valid_answer = values.question_valid_answer;
       } else if (questionType === "line-match") {
         questionData.question_answers = values.question_answers;
+      } else if (questionType === "matching-with-images") {
+        const invalidPair = matchingPairs.find((p) => !p.name || !p.imageFile);
+        if (invalidPair) {
+          toast.error("الرجاء إدخال الاسم والصورة لكل زوج");
+          setLoading(false);
+          return;
+        }
+
+        const uploadedPairs = await Promise.all(
+          matchingPairs.map(async (pair) => {
+            const url = await uploadImage(pair.imageFile);
+            return { name: pair.name, image: url };
+          })
+        );
+
+        if (uploadedPairs.some((p) => !p.image)) {
+          toast.error("فشل رفع بعض الصور، حاول مجدداً");
+          setLoading(false);
+          return;
+        }
+
+        questionData.question_text = uploadedPairs;
+        questionData.question_answers = uploadedPairs;
+        questionData.question_valid_answer = uploadedPairs;
       }
 
       if (imageFile) {
@@ -124,6 +153,7 @@ const AddQuestion = ({ open, setOpen, unitId, courseId, getQuestions }) => {
         setQuestionType("mcq");
         setImageUrl("");
         setImageFile(null);
+        setMatchingPairs([{ name: "", imageFile: null, imagePreview: "" }]);
         toast.success("تم إضافة السؤال بنجاح");
       } else {
         toast.error(response.data.message || "حدث خطأ أثناء إضافة السؤال");
@@ -216,6 +246,7 @@ const AddQuestion = ({ open, setOpen, unitId, courseId, getQuestions }) => {
             <Radio value="mcq">اختيار من متعدد</Radio>
             <Radio value="arrangePuzzle">ترتيب الكلمات/الأحرف</Radio>
             <Radio value="line-match">توصيل الخطوط</Radio>
+            <Radio value="matching-with-images">مطابقة مع صور</Radio>
           </Radio.Group>
         </Form.Item>
 
@@ -237,6 +268,13 @@ const AddQuestion = ({ open, setOpen, unitId, courseId, getQuestions }) => {
         )}
 
         {questionType === "line-match" && <LineMatchQuestions form={form} />}
+
+        {questionType === "matching-with-images" && (
+          <MatchingWithImagesQuestions
+            pairs={matchingPairs}
+            setPairs={setMatchingPairs}
+          />
+        )}
       </Form>
     </Drawer>
   );

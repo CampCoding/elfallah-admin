@@ -108,6 +108,29 @@ const QuestionDetailsModal = ({ open, onClose, question }) => {
           </div>
         </div>
       );
+    } else if (question.type === "matching-with-images") {
+      const pairs = question.matchingImages || [];
+
+      return (
+        <div className="mt-4">
+          <Title level={5}>الأزواج:</Title>
+          <div className="grid grid-cols-2 gap-3">
+            {pairs.map((pair, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg"
+              >
+                <img
+                  src={pair.image}
+                  alt={pair.name}
+                  className="w-16 h-16 object-cover rounded"
+                />
+                <Text className="font-medium">{pair.name}</Text>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
     } else if (question.type === "line-match") {
       return (
         <div className="mt-4">
@@ -173,6 +196,8 @@ const QuestionDetailsModal = ({ open, onClose, question }) => {
                 ? "green"
                 : question.type === "line-match"
                 ? "orange"
+                : question.type === "matching-with-images"
+                ? "purple"
                 : "default"
             }
           >
@@ -184,16 +209,19 @@ const QuestionDetailsModal = ({ open, onClose, question }) => {
               ? "ترتيب الكلمات/الأحرف"
               : question.type === "line-match"
               ? "توصيل الخطوط"
+              : question.type === "matching-with-images"
+              ? "مطابقة مع صور"
               : question.type || ""}
           </Tag>
         </div>
 
-        {question.type !== "line-match" && (
-          <div className="my-4">
-            <Title level={5}>نص السؤال:</Title>
-            <Text>{question.question_text}</Text>
-          </div>
-        )}
+        {question.type !== "line-match" &&
+          question.type !== "matching-with-images" && (
+            <div className="my-4">
+              <Title level={5}>نص السؤال:</Title>
+              <Text>{question.question_text}</Text>
+            </div>
+          )}
 
         {question.question_image && (
           <div className="my-4 flex justify-center items-center">
